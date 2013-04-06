@@ -89,24 +89,16 @@ class Game(object):
         and continue guessing.
         """
         req = p1.request()
-        print("p1 request: {}".format(str(req)))
         resp = p2.respond(req)
-        print("p2 response: {}".format(str(resp)))
         while (not resp.go_fish):
-            print("p1 guessed right!")
             p1.receive_response(resp)
             req = p1.request()
-            print("p1 request: {}".format(str(req)))
             resp = p2.respond(req)
-            print("p2 response: {}".format(str(resp)))
         next_card = self.deck.get_card()
-        print("Go fish! giving p1 new card: {}.".format(str(next_card)))
         resp.set_card(next_card)
         p1.receive_response(resp)
 
     def _outcome(self):
-        p1_sets = self.player_one.sets()
-        p2_sets = self.player_two.sets()
         return Outcome(self.player_one, self.player_two)
        
     def run(self):
@@ -115,7 +107,6 @@ class Game(object):
         """
         try:
             while (True):
-                 print("Hands: "+str(self.player_one.hand)+" \n "+str(self.player_two.hand))
                  self._take_turn(self.player_one, self.player_two);
                  self._take_turn(self.player_two, self.player_one);
         except DeckEmptyError:

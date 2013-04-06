@@ -5,21 +5,27 @@ from monte_fishing.game import (
         Request,
         )
 
-class RandomPlayer(object):
+class MemoryPlayer(object):
     def __init__(self,hand):
-        self.name="Basic"
+        self.name="Memory"
         self.hand = {}
         for card in hand:
             if card.value in self.hand:
                 self.hand[card.value].append(card)
             else:
                 self.hand[card.value] = [card]
+        self.opponent_hand = set()
 
     def request(self):
-        value = random.choice(self.hand.keys())
+        if (any(map(lambda v : v in self.hand.keys(), self.opponent_hand))):
+            value = random.choice(list(self.opponent_hand & set(self.hand.keys())))
+        else:
+            value = random.choice(self.hand.keys())
         return Request(value)
 
     def respond(self,request):
+        self.opponent_hand.add(request.value)
+
         if request.value not in self.hand:
             return Response() # Go fish.
         else:
@@ -31,6 +37,8 @@ class RandomPlayer(object):
     def receive_response(self, response):
         if (response.card is not None):
             card_value = response.card[0].value
+            if (card_value in self.opponent_hand):
+                self.opponent_hand.remove(card_value)
             if (card_value in self.hand):
                 self.hand[card_value] = self.hand[card_value] + response.card
             else:
@@ -40,5 +48,5 @@ class RandomPlayer(object):
         return self.hand 
 
     def __repr__(self):
-        return "Basic Player{sets: "+str(len(self.sets()))+" hand: "+str(self.hand)+"}"
+        return "Memory Player{sets: "+str(len(self.sets()))+" hand: "+str(self.hand)+"}"
 

@@ -32,5 +32,7 @@ class Arbiter(multiprocessing.Process):
                 g = Game(strategy_one, strategy_two)
                 outcome = g.run()
                 self.outcome_log.append(outcome)
-                print(outcome)
+                if (outcome.winner is not None):
+                    print ("Winner: "+ outcome.winner.name +" Loser: "+outcome.loser.name)
+                print("Draw")
 
