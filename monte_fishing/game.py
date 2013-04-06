@@ -60,7 +60,7 @@ class Outcome():
 class Game():
     """Conducts a game between two players.
     """
-    def __init__(self, player_one_factory, player_two_factory):
+    def __init__(self, strategy_one_factory, strategy_two_factory):
         self.deck = Deck()
         self.go_fish = Response()
         self.player_one = strategy_one_factory.get_player(self.deck.get_hand(7)) 

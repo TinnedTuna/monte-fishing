@@ -51,7 +51,6 @@ class ResponseTests(unittest.TestCase):
         self.assertNotEqual(go_fish,player_response)
         self.assertEqual(player_response.card, Card("Hearts",2))
         
-
 class LosingPlayer():
     def get_strategy_name(self):
         return "Losing Strategy"
