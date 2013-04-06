@@ -1,0 +1,11 @@
+*.egg
+*.sqlite
+*.egg-info
+dist
+build
+data
+env
+bin
+var
+sdist
+*.py[co]
