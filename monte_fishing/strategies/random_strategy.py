@@ -1,5 +1,5 @@
-from monte_fishing.players.random_player import RandomPlayer
-from monte_fishing.strategy_factory import StrategyFactory
+from monte_fishing.players.random import RandomPlayer
+from monte_fishing.strategy import StrategyFactory
 
 class RandomStrategy(StrategyFactory):
     def __init__(self):
