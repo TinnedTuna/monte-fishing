@@ -1,4 +1,4 @@
-from monte_fishing.players.random import RandomPlayer
+from monte_fishing.players.basic import RandomPlayer
 from monte_fishing.strategy import StrategyFactory
 
 class RandomStrategy(StrategyFactory):

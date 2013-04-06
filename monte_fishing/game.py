@@ -1,4 +1,7 @@
-from monte_fishing.deck import Deck
+from monte_fishing.deck import (
+        Deck,
+        DeckEmptyError,
+        )
 
 class Response(object):
     """Encapsulates an opponent's response to a request.
