@@ -3,6 +3,7 @@ import unittest
 from monte_fishing.deck import (
       Deck,
       Card,
+      DeckEmptyError,
       )
 
 class DeckTests(unittest.TestCase):
@@ -32,8 +33,15 @@ class DeckTests(unittest.TestCase):
         hand = self.d.get_hand(52)
         no_dupes_hand = set(hand)
         self.assertTrue(len(no_dupes_hand), 52)
-        
 
+    def testGetTooManyCards(self):
+        self.d.get_hand(52)
+        with self.assertRaises(DeckEmptyError):
+            self.d.get_card()
+
+    def testGetHandTooBig(self):
+        with self.assertRaises(DeckEmptyError):
+            self.d.get_hand(53)
 
 class CardTests(unittest.TestCase):
     def setUp(self):

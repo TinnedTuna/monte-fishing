@@ -1,6 +1,6 @@
 import random
 
-class DeckEmptyError():
+class DeckEmptyError(Exception):
     pass
 
 class Card():
