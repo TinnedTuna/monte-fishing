@@ -10,8 +10,11 @@ class Arbiter(multiprocessing.Process):
     def __init__(self,trials):
         multiprocessing.Process.__init__(self)
         print("About to load strategies")
-        self.strategies=straight.plugin.load('monte_fishing.strategies', subclasses=StrategyFactory)
-        print(self.strategies.produce())
+        self.strategies=straight.plugin.load('monte_fishing.strategies', subclasses=StrategyFactory).produce()
+        if (len(self.strategies) == 0):
+            print("no plugins loaded.")
+        for s in self.strategies:
+            print(s)
         self.trials = trials
         self.outcome_log = []
 

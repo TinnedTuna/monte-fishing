@@ -5,7 +5,7 @@ from monte_fishing.game import (
         Request,
         )
 
-class RandomPlayer():
+class RandomPlayer(object):
     def __init__(self,hand):
         self.hand = hand
 

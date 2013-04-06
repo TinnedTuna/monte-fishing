@@ -1,6 +1,6 @@
 from monte_fishing.deck import Deck
 
-class Response():
+class Response(object):
     """Encapsulates an opponent's response to a request.
     """
     def __init__(self, card=None):
@@ -20,7 +20,7 @@ class Response():
         else:
            return (other.card == self.card)
 
-class Request():
+class Request(object):
     """Encapsulate's a player's request for a card.
     """
     def __init__(self, card=None):
@@ -29,7 +29,7 @@ class Request():
     def __eq__(self, other):
         return (other.card == self.card)
 
-class Outcome():
+class Outcome(object):
     """Determines the winner of a game between two players.
     """
     def __init__(self, p1, p2):
@@ -57,7 +57,7 @@ class Outcome():
         else:
             return None
 
-class Game():
+class Game(object):
     """Conducts a game between two players.
     """
     def __init__(self, strategy_one_factory, strategy_two_factory):

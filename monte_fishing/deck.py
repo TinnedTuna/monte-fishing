@@ -3,7 +3,7 @@ import random
 class DeckEmptyError(Exception):
     pass
 
-class Card():
+class Card(object):
     """Represents a single card.
     """
     def __init__(self, suit, value):
@@ -26,7 +26,7 @@ class Card():
         h = h * self.value.__hash__() + incl;
         return h
 
-class Deck():
+class Deck(object):
     """Represents a deck.
     """
     def __init__(self):
@@ -49,4 +49,3 @@ class Deck():
         for i in range(size):
             hand.append(self.get_card())
         return hand
-    
