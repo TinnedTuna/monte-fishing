@@ -2,8 +2,8 @@ import arbiter
 
 if __name__=='__main__':
     jobs = []
-    for i in range(4):
-        a = arbiter.Arbiter(500)
+    for i in range(1):
+        a = arbiter.Arbiter(1)
         a.start() # Non-blocking
         jobs.append(a)
     for j in jobs:

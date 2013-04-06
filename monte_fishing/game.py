@@ -15,7 +15,7 @@ class Response(object):
             self.card = card
 
     def set_card(self, card):
-        self.card = card
+        self.card = [card]
 
     def __eq__(self,other):
         if (other.go_fish == self.go_fish):
@@ -23,14 +23,24 @@ class Response(object):
         else:
            return (other.card == self.card)
 
+    def __repr__(self):
+        if (self.card is None):
+            card = "None"
+        else:
+            card = str(self.card)
+        return "Response{go_fish:"+str(self.go_fish)+" card:"+card+"}"
+
 class Request(object):
     """Encapsulate's a player's request for a card.
     """
-    def __init__(self, card=None):
-        self.card = card
+    def __init__(self, value=None):
+        self.value = value
 
     def __eq__(self, other):
-        return (other.card == self.card)
+        return (other.value == self.value)
+
+    def __repr__(self):
+        return "Request{value: "+str(self.value)+"}"
 
 class Outcome(object):
     """Determines the winner of a game between two players.
@@ -60,6 +70,9 @@ class Outcome(object):
         else:
             return None
 
+    def __repr__(self):
+        return "Outcome{winner: "+str(self.winner)+" loser:"+str(self.loser)+"}"
+
 class Game(object):
     """Conducts a game between two players.
     """
@@ -76,15 +89,22 @@ class Game(object):
         and continue guessing.
         """
         req = p1.request()
+        print("p1 request: {}".format(str(req)))
         resp = p2.respond(req)
-        while (resp != self.go_fish):
-          p1.receive_response(resp)
-          req = p1.request()
-          resp = p2.respond(req)
-        resp.set_card(self.deck.get_card())
+        print("p2 response: {}".format(str(resp)))
+        while (not resp.go_fish):
+            print("p1 guessed right!")
+            p1.receive_response(resp)
+            req = p1.request()
+            print("p1 request: {}".format(str(req)))
+            resp = p2.respond(req)
+            print("p2 response: {}".format(str(resp)))
+        next_card = self.deck.get_card()
+        print("Go fish! giving p1 new card: {}.".format(str(next_card)))
+        resp.set_card(next_card)
         p1.receive_response(resp)
 
-    def _outcome():
+    def _outcome(self):
         p1_sets = self.player_one.sets()
         p2_sets = self.player_two.sets()
         return Outcome(self.player_one, self.player_two)
@@ -93,13 +113,11 @@ class Game(object):
         """Runs the game by allowing the players to take turns against one
            another.
         """
-        while (True):
-            try: 
-                self._take_turn(self.player_one, self.player_two);
-            except DeckEmptyError:
-                return
-            try: 
-                self._take_turn(self.player_two, self.player_one);
-            except DeckEmptyError:
-                return
+        try:
+            while (True):
+                 print("Hands: "+str(self.player_one.hand)+" \n "+str(self.player_two.hand))
+                 self._take_turn(self.player_one, self.player_two);
+                 self._take_turn(self.player_two, self.player_one);
+        except DeckEmptyError:
+            return self._outcome()
         return self._outcome()
