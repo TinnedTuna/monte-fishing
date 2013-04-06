@@ -3,7 +3,8 @@ import unittest
 from monte_fishing.deck import Card
 
 from monte_fishing.game import (
-      Outcome
+      Outcome,
+      Response,
       )
 
 class OutcomeTests(unittest.TestCase):
@@ -30,6 +31,26 @@ class OutcomeTests(unittest.TestCase):
     def testLosingVWinning(self):
         o = Outcome(LosingPlayer(), WinningPlayer())
         self.assertEqual("Winning Strategy", o.get_winning_strategy())
+
+
+class ResponseTests(unittest.TestCase):
+    def setUp(self):
+        pass
+    
+    def tearDown(self):
+        pass
+
+    def testGoFish(self):
+        go_fish = Response()
+        self.assertEqual(go_fish, Response())
+        self.assertTrue(go_fish.card is None)
+
+    def testRespondWithCard(self):
+        go_fish = Response()
+        player_response = Response(Card("Hearts",2))
+        self.assertNotEqual(go_fish,player_response)
+        self.assertEqual(player_response.card, Card("Hearts",2))
+        
 
 class LosingPlayer():
     def get_strategy_name(self):

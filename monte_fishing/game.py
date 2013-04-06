@@ -6,6 +6,7 @@ class Response():
     def __init__(self, card=None):
         if (card is None):
             self.go_fish = True
+            self.card = None
         else: 
             self.go_fish = False
             self.card = card
