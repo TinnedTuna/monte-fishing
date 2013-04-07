@@ -91,6 +91,9 @@ class Game(object):
         req = p1.request()
         resp = p2.respond(req)
         while (not resp.go_fish):
+            if (len(p2.hand) == 0):
+                # In the event of a run of guesses that empties the opponet's hand.
+                p2.hand = [self.deck.get_card()]
             p1.receive_response(resp)
             req = p1.request()
             resp = p2.respond(req)
