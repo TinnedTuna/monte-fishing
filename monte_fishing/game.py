@@ -51,27 +51,30 @@ class Outcome(object):
         if (len(p1.sets()) > len(p2.sets())):
             self.winner = p1 
             self.loser = p2
+            self.draw = False
         elif (len(p2.sets()) > len(p1.sets())):
             self.winner = p2
             self.loser = p1
+            self.draw = False
         else:
-            self.winner = None
-            self.loser = None
+            self.winner = p1 
+            self.loser = p2 
+            self.draw = True
 
     def get_winning_strategy(self):
-        if (self.winner is not None):
+        if (not self.draw):
             return self.winner.get_strategy_name()
         else:
             return None
 
     def get_loser_strategy(self):
-        if (self.loser is not None):
+        if (not self.draw):
             return self.loser.get_strategy_name()
         else:
             return None
 
     def __repr__(self):
-        return "Outcome{winner: "+str(self.winner)+" loser:"+str(self.loser)+"}"
+        return "Outcome{winner: "+str(self.winner.name)+" loser:"+str(self.loser.name)+" draw: "+str(self.draw)+"}"
 
 class Game(object):
     """Conducts a game between two players.

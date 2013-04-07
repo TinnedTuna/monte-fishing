@@ -7,7 +7,7 @@ from monte_fishing.game import (
 
 class SecretivePlayer(object):
     def __init__(self,hand):
-        self.name="Memory"
+        self.name="Secretive"
         self.hand = {}
         for card in hand:
             if card.value in self.hand:

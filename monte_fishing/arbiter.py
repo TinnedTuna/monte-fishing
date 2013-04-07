@@ -24,7 +24,6 @@ class Arbiter(multiprocessing.Process):
         """
         for i in range(self.trials):
             self._trial()
-        return self.outcome_log
     
     def _trial(self):
         for strategy_one in self.strategies:
@@ -32,7 +31,4 @@ class Arbiter(multiprocessing.Process):
                 g = Game(strategy_one, strategy_two)
                 outcome = g.run()
                 self.outcome_log.append(outcome)
-                if (outcome.winner is not None):
-                    print ("Winner: "+ outcome.winner.name +" Loser: "+outcome.loser.name)
-                print("Draw")
-
+                print(outcome)
