@@ -15,6 +15,14 @@ Installing and Running
   - `$> ./env/bin/python setup.py install`
   - `$> ./env/bin/python -m monte_fishing.main --trials <trials> --processes <processes>`
 
+Tests
+=====
+
+The tests are almost uniformly inadequate at the moment, but they can be run by using 
+
+  - `$> ./env/bin/nosetests`
+
+
 Creating your own Strategy
 ==========================
 
