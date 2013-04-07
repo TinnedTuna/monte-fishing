@@ -1,4 +1,5 @@
 import multiprocessing
+import sys
 import straight.plugin
 
 from monte_fishing.game import Game
@@ -7,7 +8,7 @@ from monte_fishing.strategy import StrategyFactory
 class Arbiter(multiprocessing.Process):
     """Arbiter of multiple games. Loads plugins, and runs the games.
     """
-    def __init__(self,trials):
+    def __init__(self,trials,print_lock):
         multiprocessing.Process.__init__(self)
         print("About to load strategies")
         self.strategies=straight.plugin.load('monte_fishing.strategies', subclasses=StrategyFactory).produce()
@@ -16,6 +17,7 @@ class Arbiter(multiprocessing.Process):
         for s in self.strategies:
             print(s)
         self.trials = trials
+        self.print_lock = print_lock
         self.outcome_log = []
 
     def run(self):
@@ -30,5 +32,7 @@ class Arbiter(multiprocessing.Process):
             for strategy_two in self.strategies:
                 g = Game(strategy_one, strategy_two)
                 outcome = g.run()
-                self.outcome_log.append(outcome)
+                self.print_lock.acquire()
                 print(outcome)
+                sys.stdout.flush()
+                self.print_lock.release()
