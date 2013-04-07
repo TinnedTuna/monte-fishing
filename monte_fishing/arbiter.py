@@ -34,6 +34,6 @@ class Arbiter(multiprocessing.Process):
                 g = Game(strategy_one, strategy_two)
                 outcome = g.run()
                 self.outcome_log.append(str(outcome))
-                if len(self.outcome_log) > 50:
+                if len(self.outcome_log) > 100:
                     self.printer.print_batch(self.outcome_log)
                     self.outcome_log=[]
