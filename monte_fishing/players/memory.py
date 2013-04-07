@@ -60,6 +60,13 @@ class MemoryPlayer(object):
                 completed.add(value)
         return completed
 
+    def add_card(self, card):
+        if (card.value in self.hand):
+            self.hand[card.value].append(card)
+        else:
+            self.hand[card.value] = [card]
+
+
     def __repr__(self):
         return "Memory Player{sets: "+str(len(self.sets()))+" hand: "+str(self.hand)+"}"
 

@@ -36,6 +36,12 @@ class RandomPlayer(object):
             else:
                 self.hand[card_value] = response.card
 
+    def add_card(self, card):
+        if (card.value in self.hand):
+            self.hand[card.value].append(card)
+        else:
+            self.hand[card.value] = [card]
+
     def sets(self):
         return self.hand 
 
