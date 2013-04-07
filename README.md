@@ -11,9 +11,9 @@ times, with different starting decks.
 Installing and Running
 ======================
 
-  $> vitualenv env
-  $> ./env/bin/python setup.py install
-  $> ./env/bin/python -m monte_fishing.main --trials <trials> --processes <processes>
+  - `$> vitualenv env`
+  - `$> ./env/bin/python setup.py install`
+  - `$> ./env/bin/python -m monte_fishing.main --trials <trials> --processes <processes>`
 
 Creating your own Strategy
 ==========================
