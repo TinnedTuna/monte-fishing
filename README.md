@@ -15,6 +15,10 @@ Installing and Running
   - `$> ./env/bin/python setup.py install`
   - `$> ./env/bin/python -m monte_fishing.main --trials <trials> --processes <processes>`
 
+This package can also be run with PyPy. Simply setup your virtualenv with 
+the `-p` parameter specifying pypy as your Python interpretter, then follow the
+usual steps.
+
 Tests
 =====
 
